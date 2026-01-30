@@ -1,5 +1,5 @@
-#include "timer.hpp"
-#include "utils.hpp"
+#include "timer.h"
+#include "utils.h"
 
 namespace monsoon {
 bool Timer::Comparator::operator()(const Timer::ptr &lhs, const Timer::ptr &rhs) const {

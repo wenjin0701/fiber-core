@@ -4,7 +4,7 @@
 #  include <memory>
 #  include <set>
 #  include <vector>
-#  include "mutex.hpp"
+#  include "mutex.h"
 
 namespace monsoon {
 class TimerManager;

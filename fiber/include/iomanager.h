@@ -2,10 +2,10 @@
 #define __SYLAR_IOMANAGER_H__
 
 #include "fcntl.h"
-#include "scheduler.hpp"
+#include "scheduler.h"
 #include "string.h"
 #include "sys/epoll.h"
-#include "timer.hpp"
+#include "timer.h"
 
 namespace monsoon {
 enum Event {

@@ -1,8 +1,8 @@
-#include "fd_manager.hpp"
+#include "fd_manager.h"
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <unistd.h>
-#include "hook.hpp"
+#include "hook.h"
 
 namespace monsoon {
 

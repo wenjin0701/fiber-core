@@ -1,8 +1,8 @@
-#include "fiber.hpp"
+#include "fiber.h"
 #include <assert.h>
 #include <atomic>
-#include "scheduler.hpp"
-#include "utils.hpp"
+#include "scheduler.h"
+#include "utils.h"
 
 namespace monsoon {
 const bool DEBUG = true;
