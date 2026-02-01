@@ -2,7 +2,7 @@
 #include "fiber.h"
 #include "hook.h"
 
-namespace monsoon {
+namespace wbfiber {
 // 当前线程的调度器，同一调度器下的所有线程共享同一调度器实例 （线程级调度器）
 static thread_local Scheduler *cur_scheduler = nullptr;
 // 当前线程的调度协程，每个线程一个 (协程级调度器)
@@ -200,4 +200,4 @@ void Scheduler::stop() {
   }
 }
 
-}  // namespace monsoon
+}  // namespace wbfiber

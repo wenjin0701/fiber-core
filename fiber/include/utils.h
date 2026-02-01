@@ -1,5 +1,5 @@
-#ifndef __MONSOON_UTIL_H__
-#define __MONSOON_UTIL_H__
+#ifndef __WB_FIBER_UTIL_H__
+#define __WB_FIBER_UTIL_H__
 
 #include <assert.h>
 #include <cxxabi.h>
@@ -15,7 +15,7 @@
 #include <sstream>
 #include <vector>
 
-namespace monsoon {
+namespace wbfiber {
 pid_t GetThreadId();
 u_int32_t GetFiberId();
 // 获取当前启动的毫秒数
@@ -86,6 +86,6 @@ static void CondPanic(bool condition, std::string err) {
     assert(condition);
   }
 }
-}  // namespace monsoon
+}  // namespace wbfiber
 
 #endif

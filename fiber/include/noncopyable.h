@@ -1,7 +1,7 @@
 #ifndef __SYLAR_NONCOPYABLE_H__
 #define __SYLAR_NONCOPYABLE_H__
 
-namespace monsoon {
+namespace wbfiber {
 class Nonecopyable {
  public:
   Nonecopyable() = default;
@@ -9,6 +9,6 @@ class Nonecopyable {
   Nonecopyable(const Nonecopyable &) = delete;
   Nonecopyable operator=(const Nonecopyable) = delete;
 };
-}  // namespace monsoon
+}  // namespace wbfiber
 
 #endif

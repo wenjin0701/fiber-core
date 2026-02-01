@@ -12,7 +12,7 @@
 #include <memory>
 #include <thread>
 
-namespace monsoon {
+namespace wbfiber {
 class Thread {
  public:
   typedef std::shared_ptr<Thread> ptr;
@@ -38,6 +38,6 @@ class Thread {
   std::function<void()> cb_;
   std::string name_;
 };
-}  // namespace monsoon
+}  // namespace wbfiber
 
 #endif

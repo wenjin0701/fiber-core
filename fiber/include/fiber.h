@@ -1,5 +1,5 @@
-#ifndef __MONSOON_FIBER_H__
-#define __MONSOON_FIBER_H__
+#ifndef __WB_FIBER_FIBER_H__
+#define __WB_FIBER_FIBER_H__
 
 #include <stdio.h>
 #include <ucontext.h>
@@ -9,7 +9,7 @@
 #include <memory>
 #include "utils.h"
 
-namespace monsoon {
+namespace wbfiber {
 class Fiber : public std::enable_shared_from_this<Fiber> {
  public:
   typedef std::shared_ptr<Fiber> ptr;
@@ -71,6 +71,6 @@ class Fiber : public std::enable_shared_from_this<Fiber> {
   // 本协程是否参与调度器调度
   bool isRunInScheduler_;
 };
-}  // namespace monsoon
+}  // namespace wbfiber
 
 #endif

@@ -1,5 +1,5 @@
-#ifndef __MONSOON_SCHEDULER_H__
-#define __MONSOON_SCHEDULER_H__
+#ifndef __WB_FIBER_SCHEDULER_H__
+#define __WB_FIBER_SCHEDULER_H__
 
 #include <atomic>
 #include <boost/type_index.hpp>
@@ -13,7 +13,7 @@
 #include "thread.h"
 #include "utils.h"
 
-namespace monsoon {
+namespace wbfiber {
 // 调度任务
 class SchedulerTask {
  public:
@@ -142,6 +142,6 @@ class Scheduler {
   int rootThread_ = 0;
   bool isStopped_ = false;
 };
-}  // namespace monsoon
+}  // namespace wbfiber
 
 #endif

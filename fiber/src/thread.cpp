@@ -1,7 +1,7 @@
 #include "thread.h"
 #include "utils.h"
 
-namespace monsoon {
+namespace wbfiber {
 // 指向当前线程
 static thread_local Thread *cur_thread = nullptr;
 static thread_local std::string cur_thread_name = "UNKNOW";
@@ -22,7 +22,7 @@ void *Thread::run(void *arg) {
   Thread *thread = (Thread *)arg;
   cur_thread = thread;
   cur_thread_name = thread->name_;
-  thread->id_ = monsoon::GetThreadId();
+  thread->id_ = wbfiber::GetThreadId();
   // 给线程命名
   pthread_setname_np(pthread_self(), thread->name_.substr(0, 15).c_str());
   std::function<void()> cb;
@@ -64,4 +64,4 @@ void Thread::SetName(const std::string &name) {
   cur_thread_name = name;
 }
 
-}  // namespace monsoon
+}  // namespace wbfiber

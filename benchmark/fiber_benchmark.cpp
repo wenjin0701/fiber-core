@@ -10,7 +10,7 @@ void test_fiber_creation() {
     auto start = std::chrono::high_resolution_clock::now();
     
     for (int i = 0; i < count; i++) {
-        monsoon::Fiber::ptr fiber = std::make_shared<monsoon::Fiber>([]() {
+        wbfiber::Fiber::ptr fiber = std::make_shared<wbfiber::Fiber>([]() {
             // 空协程
         });
     }
@@ -29,11 +29,11 @@ void test_fiber_switch() {
     const int count = 1000000;
     std::atomic<int> switch_count = 0;
     
-    monsoon::Fiber::ptr main_fiber = monsoon::Fiber::GetThis();
-    monsoon::Fiber::ptr fiber = std::make_shared<monsoon::Fiber>([&switch_count, main_fiber, count]() {
+    wbfiber::Fiber::ptr main_fiber = wbfiber::Fiber::GetThis();
+    wbfiber::Fiber::ptr fiber = std::make_shared<wbfiber::Fiber>([&switch_count, main_fiber, count]() {
         while (switch_count < count) {
             switch_count++;
-            monsoon::Fiber::GetThis()->yield();
+            wbfiber::Fiber::GetThis()->yield();
         }
     });
     
@@ -58,9 +58,9 @@ void test_fiber_concurrent() {
     const int task_per_fiber = 1000;
     std::atomic<int> total_tasks = 0;
     
-    std::vector<monsoon::Fiber::ptr> fibers;
+    std::vector<wbfiber::Fiber::ptr> fibers;
     for (int i = 0; i < fiber_count; i++) {
-        fibers.push_back(std::make_shared<monsoon::Fiber>([&total_tasks, task_per_fiber]() {
+        fibers.push_back(std::make_shared<wbfiber::Fiber>([&total_tasks, task_per_fiber]() {
             for (int j = 0; j < task_per_fiber; j++) {
                 total_tasks++;
             }

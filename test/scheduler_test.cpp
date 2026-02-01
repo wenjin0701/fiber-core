@@ -6,13 +6,13 @@
 void test_scheduler_basic() {
     std::cout << "=== Test Scheduler Basic ===" << std::endl;
     
-    monsoon::Scheduler::ptr scheduler = std::make_shared<monsoon::Scheduler>(2, false, "TestScheduler");
+    wbfiber::Scheduler::ptr scheduler = std::make_shared<wbfiber::Scheduler>(2, false, "TestScheduler");
     std::atomic<int> count = 0;
     
     // 添加任务
     for (int i = 0; i < 10; i++) {
         scheduler->scheduler([&count, i]() {
-            std::cout << "Task " << i << " run in thread " << monsoon::Thread::GetThis()->getId() << std::endl;
+            std::cout << "Task " << i << " run in thread " << wbfiber::Thread::GetThis()->getId() << std::endl;
             count++;
         });
     }
@@ -23,7 +23,7 @@ void test_scheduler_basic() {
     // 添加更多任务
     for (int i = 10; i < 20; i++) {
         scheduler->scheduler([&count, i]() {
-            std::cout << "Task " << i << " run in thread " << monsoon::Thread::GetThis()->getId() << std::endl;
+            std::cout << "Task " << i << " run in thread " << wbfiber::Thread::GetThis()->getId() << std::endl;
             count++;
         });
     }
@@ -38,16 +38,16 @@ void test_scheduler_basic() {
 void test_scheduler_fiber() {
     std::cout << "\n=== Test Scheduler Fiber ===" << std::endl;
     
-    monsoon::Scheduler::ptr scheduler = std::make_shared<monsoon::Scheduler>(3, false, "FiberScheduler");
+    wbfiber::Scheduler::ptr scheduler = std::make_shared<wbfiber::Scheduler>(3, false, "FiberScheduler");
     std::atomic<int> count = 0;
     
     // 添加协程任务
     for (int i = 0; i < 5; i++) {
-        scheduler->scheduler(std::make_shared<monsoon::Fiber>([&count, i]() {
-            std::cout << "Fiber task " << i << " start, id: " << monsoon::Fiber::GetCurFiberID() << std::endl;
+        scheduler->scheduler(std::make_shared<wbfiber::Fiber>([&count, i]() {
+            std::cout << "Fiber task " << i << " start, id: " << wbfiber::Fiber::GetCurFiberID() << std::endl;
             count++;
             // 让出执行权
-            monsoon::Fiber::GetThis()->yield();
+            wbfiber::Fiber::GetThis()->yield();
             std::cout << "Fiber task " << i << " resume" << std::endl;
             count++;
             std::cout << "Fiber task " << i << " end" << std::endl;
@@ -64,7 +64,7 @@ void test_scheduler_fiber() {
 void test_scheduler_thread_specify() {
     std::cout << "\n=== Test Scheduler Thread Specify ===" << std::endl;
     
-    monsoon::Scheduler::ptr scheduler = std::make_shared<monsoon::Scheduler>(3, false, "ThreadSpecifyScheduler");
+    wbfiber::Scheduler::ptr scheduler = std::make_shared<wbfiber::Scheduler>(3, false, "ThreadSpecifyScheduler");
     std::atomic<int> count = 0;
     
     // 启动调度器
@@ -72,17 +72,17 @@ void test_scheduler_thread_specify() {
     
     // 指定线程0执行任务
     scheduler->scheduler([]() {
-        std::cout << "Task in thread 0: " << monsoon::Thread::GetThis()->getId() << std::endl;
+        std::cout << "Task in thread 0: " << wbfiber::Thread::GetThis()->getId() << std::endl;
     }, 0);
     
     // 指定线程1执行任务
     scheduler->scheduler([]() {
-        std::cout << "Task in thread 1: " << monsoon::Thread::GetThis()->getId() << std::endl;
+        std::cout << "Task in thread 1: " << wbfiber::Thread::GetThis()->getId() << std::endl;
     }, 1);
     
     // 不指定线程
     scheduler->scheduler([]() {
-        std::cout << "Task in any thread: " << monsoon::Thread::GetThis()->getId() << std::endl;
+        std::cout << "Task in any thread: " << wbfiber::Thread::GetThis()->getId() << std::endl;
     });
     
     scheduler->stop();

@@ -9,7 +9,7 @@
 void test_iomanager_basic() {
     std::cout << "=== Test IOManager Basic ===" << std::endl;
     
-    monsoon::IOManager::ptr iom = std::make_shared<monsoon::IOManager>(2, false, "TestIOManager");
+    wbfiber::IOManager::ptr iom = std::make_shared<wbfiber::IOManager>(2, false, "TestIOManager");
     
     int sockfd = socket(AF_INET, SOCK_STREAM, 0);
     if (sockfd < 0) {
@@ -35,7 +35,7 @@ void test_iomanager_basic() {
     }
     
     // 添加写事件
-    iom->addEvent(sockfd, monsoon::Event::WRITE, [sockfd, iom]() {
+    iom->addEvent(sockfd, wbfiber::Event::WRITE, [sockfd, iom]() {
         std::cout << "Connect write event triggered" << std::endl;
         // 检查连接是否成功
         int error = 0;
@@ -50,7 +50,7 @@ void test_iomanager_basic() {
         // 关闭socket
         close(sockfd);
         // 取消事件
-        iom->delEvent(sockfd, monsoon::Event::WRITE);
+        iom->delEvent(sockfd, wbfiber::Event::WRITE);
     });
     
     // 启动IO管理器
@@ -68,7 +68,7 @@ void test_iomanager_basic() {
 void test_iomanager_timer() {
     std::cout << "\n=== Test IOManager Timer ===" << std::endl;
     
-    monsoon::IOManager::ptr iom = std::make_shared<monsoon::IOManager>(1, false, "TimerIOManager");
+    wbfiber::IOManager::ptr iom = std::make_shared<wbfiber::IOManager>(1, false, "TimerIOManager");
     
     int count = 0;
     // 添加一次性定时器
@@ -106,7 +106,7 @@ void test_iomanager_timer() {
 void test_iomanager_event() {
     std::cout << "\n=== Test IOManager Event ===" << std::endl;
     
-    monsoon::IOManager::ptr iom = std::make_shared<monsoon::IOManager>(2, false, "EventIOManager");
+    wbfiber::IOManager::ptr iom = std::make_shared<wbfiber::IOManager>(2, false, "EventIOManager");
     
     // 创建管道
     int pipefd[2];
@@ -116,7 +116,7 @@ void test_iomanager_event() {
     }
     
     // 添加读事件
-    iom->addEvent(pipefd[0], monsoon::Event::READ, [pipefd, iom]() {
+    iom->addEvent(pipefd[0], wbfiber::Event::READ, [pipefd, iom]() {
         char buf[1024];
         int n = read(pipefd[0], buf, sizeof(buf));
         if (n > 0) {
@@ -125,7 +125,7 @@ void test_iomanager_event() {
         }
         
         // 取消事件
-        iom->delEvent(pipefd[0], monsoon::Event::READ);
+        iom->delEvent(pipefd[0], wbfiber::Event::READ);
         close(pipefd[0]);
     });
     

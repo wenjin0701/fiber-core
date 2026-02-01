@@ -7,7 +7,7 @@
 #include "singleton.h"
 #include "thread.h"
 
-namespace monsoon {
+namespace wbfiber {
 // 文件句柄上下文，管理文件句柄类型，阻塞，关闭，读写超时
 class FdCtx : public std::enable_shared_from_this<FdCtx> {
  public:
@@ -76,6 +76,6 @@ class FdManager {
 /// 文件句柄单例
 typedef Singleton<FdManager> FdMgr;
 
-}  // namespace monsoon
+}  // namespace wbfiber
 
 #endif

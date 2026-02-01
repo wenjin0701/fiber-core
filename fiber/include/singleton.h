@@ -1,9 +1,9 @@
-#ifndef __MONSOON_SINGLETON_H__
-#define __MONSOON_SINGLETON_H__
+#ifndef __WB_FIBER_SINGLETON_H__
+#define __WB_FIBER_SINGLETON_H__
 
 #include <memory>
 
-namespace monsoon {
+namespace wbfiber {
 namespace {
 template <class T, class X, int N>
 T &GetInstanceX() {
@@ -54,6 +54,6 @@ class SingletonPtr {
   }
 };
 
-}  // namespace monsoon
+}  // namespace wbfiber
 
 #endif

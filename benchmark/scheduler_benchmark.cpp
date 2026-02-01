@@ -10,7 +10,7 @@ void test_scheduler_throughput() {
     const int thread_count = 4;
     std::atomic<int> completed_tasks = 0;
     
-    monsoon::Scheduler::ptr scheduler = std::make_shared<monsoon::Scheduler>(thread_count, false, "BenchmarkScheduler");
+    wbfiber::Scheduler::ptr scheduler = std::make_shared<wbfiber::Scheduler>(thread_count, false, "BenchmarkScheduler");
     
     auto start = std::chrono::high_resolution_clock::now();
     
@@ -47,13 +47,13 @@ void test_scheduler_concurrent_fibers() {
     const int thread_count = 8;
     std::atomic<int> completed_fibers = 0;
     
-    monsoon::Scheduler::ptr scheduler = std::make_shared<monsoon::Scheduler>(thread_count, false, "FiberSchedulerBenchmark");
+    wbfiber::Scheduler::ptr scheduler = std::make_shared<wbfiber::Scheduler>(thread_count, false, "FiberSchedulerBenchmark");
     
     auto start = std::chrono::high_resolution_clock::now();
     
     // 添加协程任务
     for (int i = 0; i < fiber_count; i++) {
-        scheduler->scheduler(std::make_shared<monsoon::Fiber>([&completed_fibers]() {
+        scheduler->scheduler(std::make_shared<wbfiber::Fiber>([&completed_fibers]() {
             // 简单计算
             int sum = 0;
             for (int j = 0; j < 100; j++) {
@@ -93,12 +93,12 @@ void test_scheduler_load_balancing() {
         thread_tasks[i] = 0;
     }
     
-    monsoon::Scheduler::ptr scheduler = std::make_shared<monsoon::Scheduler>(thread_count, false, "LoadBalancingScheduler");
+    wbfiber::Scheduler::ptr scheduler = std::make_shared<wbfiber::Scheduler>(thread_count, false, "LoadBalancingScheduler");
     
     // 添加任务
     for (int i = 0; i < task_count; i++) {
         scheduler->scheduler([&thread_tasks]() {
-            int thread_id = monsoon::Thread::GetThis()->getId() % thread_tasks.size();
+            int thread_id = wbfiber::Thread::GetThis()->getId() % thread_tasks.size();
             thread_tasks[thread_id]++;
         });
     }

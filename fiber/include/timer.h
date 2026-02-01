@@ -1,12 +1,12 @@
-#ifndef __MONSOON_TIMER_H__
-#  define __MONSSON_TIMER_H__
+#ifndef __WB_FIBER_TIMER_H__
+#  define __WB_FIBER_TIMER_H__
 
 #  include <memory>
 #  include <set>
 #  include <vector>
 #  include "mutex.h"
 
-namespace monsoon {
+namespace wbfiber {
 class TimerManager;
 
 class Timer : public std::enable_shared_from_this<Timer> {
@@ -74,6 +74,6 @@ class TimerManager {
   // 上次执行时间
   uint64_t previouseTime_ = 0;
 };
-}  // namespace monsoon
+}  // namespace wbfiber
 
 #endif

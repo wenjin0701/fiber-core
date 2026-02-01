@@ -4,7 +4,7 @@
 #include "scheduler.h"
 #include "utils.h"
 
-namespace monsoon {
+namespace wbfiber {
 const bool DEBUG = true;
 // 当前线程正在运行的协程
 static thread_local Fiber *cur_fiber = nullptr;
@@ -148,4 +148,4 @@ Fiber::~Fiber() {
   }
 }
 
-}  // namespace monsoon
+}  // namespace wbfiber

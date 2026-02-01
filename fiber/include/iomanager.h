@@ -1,5 +1,5 @@
-#ifndef __SYLAR_IOMANAGER_H__
-#define __SYLAR_IOMANAGER_H__
+#ifndef __WB_FIBER_IOMANAGER_H__
+#define __WB_FIBER_IOMANAGER_H__
 
 #include "fcntl.h"
 #include "scheduler.h"
@@ -7,7 +7,7 @@
 #include "sys/epoll.h"
 #include "timer.h"
 
-namespace monsoon {
+namespace wbfiber {
 enum Event {
   NONE = 0x0,
   READ = 0x1,
@@ -76,6 +76,6 @@ class IOManager : public Scheduler, public TimerManager {
   RWMutex mutex_;
   std::vector<FdContext *> fdContexts_;
 };
-}  // namespace monsoon
+}  // namespace wbfiber
 
 #endif

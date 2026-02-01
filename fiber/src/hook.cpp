@@ -5,7 +5,7 @@
 #include "fd_manager.h"
 #include "fiber.h"
 #include "iomanager.h"
-namespace monsoon {
+namespace wbfiber {
 // 当前线程是否启用hook
 static thread_local bool t_hook_enable = false;
 static int g_tcp_connect_timeout = 5000;
@@ -295,7 +295,7 @@ int connect_with_timeout(int fd, const struct sockaddr *addr, socklen_t addrlen,
 }
 
 int connect(int sockfd, const struct sockaddr *addr, socklen_t addrlen) {
-  return monsoon::connect_with_timeout(sockfd, addr, addrlen, s_connect_timeout);
+  return wbfiber::connect_with_timeout(sockfd, addr, addrlen, s_connect_timeout);
 }
 
 int accept(int s, struct sockaddr *addr, socklen_t *addrlen) {
@@ -473,4 +473,4 @@ int setsockopt(int sockfd, int level, int optname, const void *optval, socklen_t
   return setsockopt_f(sockfd, level, optname, optval, optlen);
 }
 }
-}  // namespace monsoon
+}  // namespace wbfiber
